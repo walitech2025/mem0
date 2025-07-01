@@ -43,7 +43,7 @@ def init_memory():
                 "config": {
                     "collection_name": "mem0",
                     "embedding_model_dims": 1024,
-                    "path": "./qdrant_data3",
+                    "path": "./qdrant_data",
                     "on_disk": True
                 }
             }
