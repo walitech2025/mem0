@@ -38,4 +38,4 @@ jobs:
             docker load < ~/mem0-app.tar
             docker stop mem0-app || true
             docker rm mem0-app || true
-            docker run -d --name mem0-app -p 5001:5001 mem0-app 
+            docker run -d --name mem0-app -p 80:80 mem0-app 
