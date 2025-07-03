@@ -7,4 +7,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "mem0/app.py"] 
+CMD ["python", "-m", "mem0.app"] 
