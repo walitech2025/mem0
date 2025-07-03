@@ -1,0 +1,22 @@
+flask
+pydantic
+qdrant-client
+numpy
+requests
+httpx
+tqdm
+typing-extensions
+# 以下为可选依赖，按需取消注释
+# pymilvus
+# chromadb
+# faiss-cpu
+# elasticsearch
+# opensearch-py
+# weaviate-client
+# pinecone
+# psycopg2
+# vecs
+# langchain
+# langchain_community
+# rank-bm25
+# posthog 

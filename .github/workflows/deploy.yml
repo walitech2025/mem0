@@ -1,0 +1,41 @@
+name: Deploy to Aliyun
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v3
+
+      - name: 构建 Docker 镜像
+        run: docker build -t mem0-app .
+
+      - name: 保存 Docker 镜像为 tar
+        run: docker save mem0-app > mem0-app.tar
+
+      - name: 通过 SSH 复制 Docker 镜像到服务器
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          username: ${{ secrets.ALIYUN_USER }}
+          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          source: "mem0-app.tar"
+          target: "~/"
+
+      - name: 通过 SSH 远程部署
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.ALIYUN_HOST }}
+          username: ${{ secrets.ALIYUN_USER }}
+          key: ${{ secrets.ALIYUN_SSH_KEY }}
+          script: |
+            docker load < ~/mem0-app.tar
+            docker stop mem0-app || true
+            docker rm mem0-app || true
+            docker run -d --name mem0-app -p 5001:5001 mem0-app 
