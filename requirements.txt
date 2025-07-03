@@ -19,4 +19,4 @@ typing-extensions
 # langchain
 # langchain_community
 # rank-bm25
-# posthog 
+posthog 
